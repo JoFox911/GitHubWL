@@ -14,6 +14,8 @@ const ESLintPlugin = require('eslint-webpack-plugin')
 
 const { configure } = require('quasar/wrappers');
 
+const path = require('path')
+
 module.exports = configure(function (ctx) {
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
@@ -74,10 +76,17 @@ module.exports = configure(function (ctx) {
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       
       chainWebpack (chain) {
+        chain.resolve.alias
+          .set('@', path.resolve(__dirname, './src'))
+          .set('@components', path.resolve(__dirname, './src/components'))
+          .set('@services', path.resolve(__dirname, './src/services'))
+          .set('@stores', path.resolve(__dirname, './src/stores'))
+          .set('@helpers', path.resolve(__dirname, './src/helpers'))
+        
         chain.plugin('eslint-webpack-plugin')
           .use(ESLintPlugin, [{ extensions: [ 'js', 'vue' ] }])
       }
-      
+
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
