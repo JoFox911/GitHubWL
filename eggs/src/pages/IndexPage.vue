@@ -8,12 +8,28 @@
       />
 
       <div class="eggs-container">
+        <div class="eggs-container-header justify-evenly items-center">
+          <span class="text-weight-bolder text-h3 text-italic q-pt-sm">
+            {{ $t('info') }}
+          </span>
+        </div>
+
         <div class="eggs-container-inner justify-evenly items-center">
-          <egg-label :colorUrl="eggsData[firstTeamEggIndex].color" class="right-animation" :isWinner="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_WINNERS)"/>
-          <egg-label :colorUrl="eggsData[secondTeamEggIndex].color" class="left-animation" :isWinner="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_WINNERS)"/>
+          <egg-label 
+            :colorUrl="eggsData[firstTeamEggIndex].color"
+            :class="{ 'right-animation': result === null }"
+            :isWinner="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_WINNERS)"
+            :isLoser="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_LOSERS)"
+            />
+
+          <egg-label 
+            :colorUrl="eggsData[secondTeamEggIndex].color"
+            :class="{ 'left-animation': result === null }"
+            :isWinner="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_WINNERS)"
+            :isLoser="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_LOSERS)"/>
         </div>          
 
-        <div class="eggs-container-buttons justify-evenly items-center">
+        <div class="eggs-container-footer justify-evenly items-center">
           <q-btn 
             class="start-btn"
             rounded
@@ -62,19 +78,19 @@ export default defineComponent({
           straight: 1,
         },
         {
-          key: 'Russian',
-          color: 'images/rus.png',
-          straight: 0,
-        },
-        {
           key: 'Red',
-          color: 'images/red.png',
+          color: 'images/purple.png',
           straight: 0.5,
         },
         {
           key: 'Green',
-          color: 'images/green.png',
+          color: 'images/yellow-red.png',
           straight: 0.5,
+        },
+        {
+          key: 'Russian',
+          color: 'images/rus.png',
+          straight: 0,
         }
       ]
     };
@@ -136,7 +152,7 @@ export default defineComponent({
 
       const sum = this.eggsData[this.firstTeamEggIndex].straight + this.eggsData[this.secondTeamEggIndex].straight
       const firstTeamWinLimit = this.eggsData[this.firstTeamEggIndex].straight / sum
-      const randValue = Math.random() / 100
+      const randValue = Math.random()
 
       if (firstTeamWinLimit <= randValue) {
         return GAME_RESULTS.FIRST_TEAM

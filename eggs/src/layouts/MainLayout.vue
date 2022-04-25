@@ -4,27 +4,22 @@
       <q-toolbar>
 
         <img
-          class="lang-label q-mr-sm"
-          src="icons/eggs.svg" 
-          @click="setLocale('uk')"
+          class="logo-label q-mr-sm"
+          src="icons/eggs.svg"
         />
 
         <q-toolbar-title>
           {{ $t('title') }}
         </q-toolbar-title>
-
+        
         <img
-          class="lang-label cursor-pointer q-mr-sm"
-          src="icons/flags/ukraine.png" 
-          @click="setLocale('uk')"
+          class="settings-label cursor-pointer"
+          src="icons/icon-settings.svg" 
+          @click="openSettings"
         />
 
-        <img
-          class="lang-label cursor-pointer q-mr-sm"
-          src="icons/flags/vereinigte-staaten.png" 
-          @click="setLocale('en-US')"
-        />
 
+        <settings-dialog v-if="displaySettingsDialog" @closeDialog="closeSettings"/>
       </q-toolbar>
     </q-header>
 
@@ -39,20 +34,24 @@
 <script>
 import { defineComponent } from 'vue'
 
-import { useSettingsStore } from '@stores/settings-store'
+import SettingsDialog from '@components/SettingsDialog.vue'
 
 export default defineComponent({
   name: 'MainLayout',
-  setup() {
-    const settingsStore = useSettingsStore()
-
+  components: {
+    SettingsDialog
+  },
+  data: function() {
     return {
-      settingsStore
+      displaySettingsDialog: false,
     }
   },
   methods: {
-    setLocale (locale) {
-      this.settingsStore.changeLocale(locale)
+    openSettings () {
+      this.displaySettingsDialog = true
+    },
+    closeSettings () {
+      this.displaySettingsDialog = false
     }
   }
 })

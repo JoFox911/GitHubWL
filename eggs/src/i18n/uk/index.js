@@ -1,4 +1,6 @@
 export default {
   title: 'Писанка',
-  start: 'Поїхали!'
+  start: 'Поїхали!',
+  info: 'Обирай та грай!',
+  settings: 'Налаштування'
 }

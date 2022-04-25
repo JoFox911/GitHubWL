@@ -1,0 +1,93 @@
+.p-dialog {
+	border-radius: $area-xs;
+	position: relative;
+	margin: auto;
+    background-color: $warning;
+}
+.p-dialog-header {
+	border-radius: $area-xs $area-xs 0 0;
+	height: 4em;
+	left: 0;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+}
+.p-dialog-header-inner {
+  p,i {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  i {
+		margin-right: $area-sm;
+	}
+}
+.p-dialog-container {
+	padding-top: 4em; //p-dialog-header height
+	border-radius: 0 0 $area-xs $area-xs;
+	overflow: auto;
+}
+
+.p-dialog-inner {
+	min-height: 10em;
+}
+.p-dialog-inner-has-header {
+	padding-top: 3em;
+	position: relative;
+	&.with-buttons {
+		padding-top: 4em;
+	}
+}
+.p-dialog-inner-header {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 3em;
+	&.with-buttons {
+		height: 4em;
+	}
+	.q-tabs__content {
+		height: 100%;
+	}
+	.q-tab {
+		min-height: 100%;
+	}
+}
+.q-dialog__inner--maximized,
+.p-dialog-full-height {
+  &.p-dialog,
+  .p-dialog-container,
+  .p-dialog-inner,
+  .p-dialog-inner>div {
+    height: 100%;
+  }
+  .p-dialog-container,
+  .p-dialog-inner {
+    overflow: hidden;
+  }
+}
+
+.q-dialog__inner {
+	padding: $area-sm;
+	&.q-dialog__inner--maximized {
+		padding: 0;
+		.p-dialog {
+			border-radius: 0;
+			box-shadow: none;
+			height: 100%;
+			max-height: 100%;
+		}
+		.p-dialog-header {
+			border-radius: 0;
+		}
+	}
+	.q-dialog__inner--maximized {
+		.p-dialog-inner-header {
+			.q-tab__label {
+				display: none;
+			}
+		}
+	}
+}
+
+
