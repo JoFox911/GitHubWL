@@ -1,6 +1,6 @@
 <template>
   <img
-    class="circle"
+    class="circle cursor-pointer"
     :src="colorUrl" 
     @click="clickOnLabel"
   />

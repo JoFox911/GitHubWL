@@ -4,16 +4,18 @@
       <q-toolbar>
 
         <img
-          class="logo-label q-mr-sm"
+          class="page-logo q-mr-sm"
           src="icons/eggs.svg"
         />
 
-        <q-toolbar-title>
-          {{ $t('title') }}
-        </q-toolbar-title>
+        <div class="page-title font-header text-warning text-italic text-center text-weight-bold">
+          <span>
+              {{ $t('info') }}
+          </span>
+        </div>
         
         <img
-          class="settings-label cursor-pointer"
+          class="settings-icon cursor-pointer"
           src="icons/icon-settings.svg" 
           @click="openSettings"
         />

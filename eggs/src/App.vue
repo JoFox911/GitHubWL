@@ -14,6 +14,10 @@ export default defineComponent({
 
     const settingsStore = useSettingsStore()
     settingsStore.initLocale()
+
+    document.body.addEventListener('click', () => {
+      settingsStore.initSound()
+    }, {once : true});
   }
 })
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div class="colors-container justify-evenly">
+    <div class="game-side-bar">
         <div class="colors-container-inner items-center">
             <color-label
                 v-for="(colorData, index) in colorsData"

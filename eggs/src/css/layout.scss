@@ -5,51 +5,180 @@
     background-image: url("~assets/images/easterBG.jpg");
 }
 
-.logo-label {
+.page-title {
+    flex: 1 1 0%;
+    min-width: 1px;
+    max-width: 100%;
+    padding: 0 12px;
+}
+
+.page-logo {
     height: 50px;
     width: auto;
 }
 
-.settings-label {
+.settings-icon {
     height: 35px;
     width: auto;
 }
 
-.lang-label {
-    height: 40px;
-    width: 40px;
+.page-footer {
+    display: flex;
+    height: $footer-width;
+
+    .start-btn {
+        font-weight: bold;
+        min-width: 60%;
+        transform: scale(1);
+        animation: pulse 4s infinite;
+    }
 }
 
-.winner {
-    transform: scale(1.1);
-	animation: goldenHalo 2s infinite;
-}
-
-.cross-image {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-	animation: rotateSmall 2s infinite;
-}
-
-.egg-inner {
+.game-container {
     position: relative;
-}
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - #{$header-width} - #{$footer-width});
+    @media (max-width: $media-x-md) {
+        flex-direction: column;
+    }
 
+    .boom {
+        display: flex;
+        background: #000000e3;
+        position: absolute;
+        width: 100vw;
+        height: calc(100vh - #{$header-width} - #{$footer-width});
 
-.circle {
-    border: 2px solid rgb(255, 255, 255);
-    background-color: #FFFFFF;
-    border-radius:50%;
-    margin: 10% 0;
-}
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            width: fit-content;
+            height: fit-content;
+        }
+    }
 
-.egg {
-    box-shadow: -35px 16px #107474b5;
-    border: 2px solid white;
-    -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    .game-side-bar {
+        max-width: 128px; // !!!!!!!
+        width: 10%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        @media (max-width: $media-x-md) {
+            max-width: 100%;
+            height: 10vh;
+            width: 100%;
+            flex-direction: row;
+        }
+
+        .colors-container-inner {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            @media (max-width: $media-x-md) {
+                flex-direction: row;
+                width: auto;
+            }
+
+            .circle {
+                border: 2px solid #ffffff;
+                background-color: #ffffff;
+                border-radius:50%;
+                margin: 10% 0;
+                margin: 10px;
+
+                @media screen and (orientation: landscape) {
+                    width: 10vh;
+                    height: 10vh;
+                }
+                
+                @media screen and (orientation: portrait) {
+                    width: 10vw;
+                    height: 10vw;
+                }
+
+                &:hover {
+                    transform: scale(1.1);
+                    border: 2px solid $warning;
+                }
+            }
+        }
+    }
+
+    .first-side-bar {
+        background: linear-gradient(to left, transparent 0%, #00000094 100%);
+        @media (max-width: $media-x-md) {
+            background: linear-gradient(to top, transparent 0%, #00000094 100%);
+        }
+    }
+
+    .second-side-bar {
+        background: linear-gradient(to right, transparent 0%, #00000094 100%);
+        @media (max-width: $media-x-md) {
+            background: linear-gradient(to bottom, transparent 0%, #00000094 100%);
+        }
+    }
+
+    .eggs-container {
+        width: calc(100% - 20%);
+        height: 100%;
+
+        @media (max-width: $media-x-md) {
+            width: 100%;
+            height: calc(100% - 20vh);
+        }
+
+        .eggs-container-inner {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+
+            .egg-inner {
+                position: relative;
+                
+                .egg {
+                    box-shadow: -$area-lg $area-md $secondary;
+                    border: 2px solid white;
+                    -webkit-border-radius: 63px 63px 63px 63px / 108px 108px 72px 72px;
+                    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+
+                    @media screen and (orientation: landscape) {
+                        width: 30vh;
+                        height: 40vh;
+                    }
+                    
+                    @media screen and (orientation: portrait) {
+                        width: 36vw;
+                        height: 48vw;
+                    }
+                    
+                    @media (max-width: $media-x-md) {
+                        box-shadow: -$area-md $area-sm $secondary;
+                    }
+                }
+
+                .cross-image {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+
+                    @media screen and (orientation: landscape) {
+                        width: 40vh;
+                    }
+                    
+                    @media screen and (orientation: portrait) {
+                        width: 40vw;
+                    }
+                }
+            }
+        }
+    }
 }
 
 .right-animation {
@@ -62,161 +191,38 @@
 	animation: rotateLeft 2s infinite;
 }
 
-.game-container {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    height: calc(100vh - #{$header-width});
+.winner-animation {
+    transform: scale(1.1);
+	animation: goldenHalo 2s infinite;
 }
 
-.colors-container {
-    background: #00000014;
-    max-width: 128px;
-    width: 10%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.colors-container-inner {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.eggs-container {
-    width: calc(100% - 20%);
-    height: 100%;
-}
-
-.eggs-container-inner {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: calc(100% - #{$eggs-footer-width} - #{$eggs-header-width});
-}
-
-.eggs-container-header {
-    display: flex;
-    height: $eggs-header-width;
-    color:#ffffff;
-}
-
-.eggs-container-footer {
-    display: flex;
-    height: $eggs-footer-width;
-}
-
-.start-btn {
-    font-weight: bold;
-    min-width: 60%;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
-	transform: scale(1);
-	animation: pulse 4s infinite;
-}
-
-@media screen and (orientation: landscape) {
-    .cross-image {
-        width: 30vh;
-    }
-
-    .egg {
-        width: 30vh;
-        height: 40vh;
-    }
-
-    .circle {
-        width: 10vh;
-        height: 10vh;
-    }
-}
-
-@media screen and (orientation: portrait) {
-    .cross-image {
-        width: 30vw;
-    }
-
-    .egg {
-        width: 36vw;
-        height: 48vw;
-    }
-
-    .circle {
-        width: 10vw;
-        height: 10vw;
-    }
-}
-
-@media (max-width: $media-x-md) {
-    .circle {
-        border: 2px solid rgb(255, 255, 255);
-        background-color: #FFFFFF;
-        border-radius:50%;
-        height: 10vh;
-        width: 10vh;
-        margin: 10px;
-    }
-
-    .egg {
-        box-shadow: -12px 5px #107474;
-    }
-
-    .game-container {
-        flex-direction: column;
-    }
-
-    .colors-container {
-        max-width: 100%;
-        height: 10vh;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-    }
-
-    .colors-container-inner {
-        display: flex;
-        flex-direction: row;
-        width: auto;
-    }
-
-    .eggs-container {
-        width: 100%;
-        height: calc(100% - 20vh);
-    }
-
-    .eggs-container-inner {
-        flex-direction: row;
-        width: 100%;
-        height: calc(100% - #{$eggs-footer-width} - #{$eggs-header-width});
-    }
+.loser-animation {
+	animation: rotateSmall 2s infinite;
 }
 
 @keyframes pulse {
     0% {
 		transform: scale(0.95);
-		box-shadow: 0 0 0 0 #1976d2e1;
 	}
 
 	70% {
 		transform: scale(1);
-		box-shadow: 0 0 0 10px rgba(29, 27, 149, 0);
 	}
 
 	100% {
 		transform: scale(0.95);
-		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	}
 }
 
 @keyframes rotateSmall{
     0%{
-        transform: translate(-50%, -50%) rotate(-3deg);
+        transform: rotate(-3deg);
     }
     40%{
-        transform: translate(-50%, -50%) rotate(3deg);
+        transform: rotate(3deg);
     }
     100%{
-        transform: translate(-50%, -50%) rotate(-3deg);
+        transform: rotate(-3deg);
     }
 }
 

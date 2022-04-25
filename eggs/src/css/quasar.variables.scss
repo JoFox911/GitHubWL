@@ -13,7 +13,7 @@
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
 $primary   : #1976d2;
-$secondary : #26A69A;
+$secondary : #107474b5;
 $accent    : #9C27B0;
 
 $dark      : #1D1D1D;
@@ -27,11 +27,14 @@ $border-color   : #ff950091;
 
 $border-width: 1px;
 $header-width  : 56px;
+$footer-width  : 96px;
+
 $eggs-header-width  : 64px;
-$eggs-footer-width  : 128px;
 
 $area-xs    : 4px;
 $area-sm    : 8px;
+$area-md    : 16px;
+$area-lg    : 36px;
 
 //mediaSizes
 $media-x-md     : 992px;

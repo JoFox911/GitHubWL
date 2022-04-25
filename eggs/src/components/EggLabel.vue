@@ -1,6 +1,6 @@
 <template>
-  <div class="egg-inner">
-    <img class="egg" :src="colorUrl"  :class="{'winner': isWinner}"/>
+  <div class="egg-inner" :class="{'loser-animation': isLoser}">
+    <img class="egg" :src="colorUrl"  :class="{'winner-animation': isWinner}"/>
     <img v-if="isLoser" class="cross-image" :src="crossUrl"/>
   </div>
 </template>

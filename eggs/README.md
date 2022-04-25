@@ -1,4 +1,4 @@
-# T-Gallery (gallery)
+# Easter Egg
 
 A Quasar Project
 

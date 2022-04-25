@@ -1,19 +1,14 @@
 <template>
   <q-page class="flex flex-center">
 
-    <div class="game-container justify-between">
+    <div class="game-container justify-between non-selectable">
       <color-list 
         :colorsData="eggsData" 
-        @onClick="index => clickOnLabelFT(index)"
+        class="first-side-bar"
+        @onClick="colorIndex => clickOnLabelFT(colorIndex)"
       />
 
       <div class="eggs-container">
-        <div class="eggs-container-header justify-evenly items-center">
-          <span class="text-weight-bolder text-h3 text-italic q-pt-sm">
-            {{ $t('info') }}
-          </span>
-        </div>
-
         <div class="eggs-container-inner justify-evenly items-center">
           <egg-label 
             :colorUrl="eggsData[firstTeamEggIndex].color"
@@ -27,27 +22,33 @@
             :class="{ 'left-animation': result === null }"
             :isWinner="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_WINNERS)"
             :isLoser="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_LOSERS)"/>
-        </div>          
-
-        <div class="eggs-container-footer justify-evenly items-center">
-          <q-btn 
-            class="start-btn"
-            rounded
-            color="warning"
-            :label="$t('start')"
-            text-color="primary"
-            size="xl"
-            @click="startGame"
-          />
-
         </div>
       </div>
 
       <color-list
-        :colorsData="eggsData" 
-        @onClick="index => clickOnLabelST(index)"
+        :colorsData="eggsData"
+        class="second-side-bar"
+        @onClick="colorIndex => clickOnLabelST(colorIndex)"
       />
+
+      <div v-if="isDelayBeforeResults" class="boom items-center animated fadeOut">
+        <img src="images/boom.png"/>
+      </div>
     </div>
+
+    <q-footer reveal elevated>
+      <div class="page-footer justify-evenly items-center">
+        <q-btn 
+          class="start-btn"
+          rounded
+          color="warning"
+          :label="isSomeOneSelectRusianEgg ? $t('beatMuscovite') : $t('start')"
+          text-color="primary"
+          size="xl"
+          @click="startGame"
+        />
+      </div>
+    </q-footer>
   </q-page>
 </template>
 
@@ -55,6 +56,7 @@
 import { defineComponent } from 'vue'
 import { GAME_RESULTS } from '@/config/gameResults.enum.js'
 
+import SoundsService from '@services/sounds.service'
 
 import ColorList from '@components/ColorList.vue'
 import EggLabel from '@components/EggLabel.vue'
@@ -68,7 +70,9 @@ export default defineComponent({
   data: function() {
     return {
       result: null,
-      timerId: null,
+      timerBeforeId: null,
+      timerDisplayId: null,
+      isDelayBeforeResults: false,
       firstTeamEggIndex: 0,
       secondTeamEggIndex: 0,
       eggsData: [
@@ -96,7 +100,10 @@ export default defineComponent({
     };
   },
   computed: {
-    gameResults: () => GAME_RESULTS
+    gameResults: () => GAME_RESULTS,
+    isSomeOneSelectRusianEgg () {
+      return [this.eggsData[this.firstTeamEggIndex].key, this.eggsData[this.secondTeamEggIndex].key].includes('Russian')
+    }
   },
   created () {
     this.firstTeamEggIndex = this.generateEggKey()
@@ -123,10 +130,19 @@ export default defineComponent({
 
     startGame () {
       this.reset()
-      clearTimeout(this.timerId)
-      this.timerId = setTimeout(() => {
-        this.result = this.selectWinner()
-      }, 1500)
+      clearTimeout(this.timerBeforeId)
+      clearTimeout(this.timerDisplayId)
+
+      this.timerBeforeId = setTimeout(() => {
+        this.isDelayBeforeResults = true
+        SoundsService.playEggCrackingSound()
+
+        this.timerDisplayId = setTimeout(() => {
+          this.result = this.selectWinner()
+          this.isDelayBeforeResults = false
+        }, 1200)
+      }, 500)
+      
     },
 
     selectWinner () {
@@ -159,6 +175,10 @@ export default defineComponent({
       }
       return GAME_RESULTS.SECOND_TEAM
     }
+  },
+  beforeUnmount () {
+      clearTimeout(this.timerBeforeId)
+      clearTimeout(this.timerDisplayId)
   }
 })
 </script>

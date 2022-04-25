@@ -162,9 +162,9 @@ module.exports = configure(function (ctx) {
       
 
       manifest: {
-        name: `T-Gallery`,
-        short_name: `T-Gallery`,
-        description: `A Quasar Project`,
+        name: `Easter Egg`,
+        short_name: `Easter Egg`,
+        description: `Urkaine Easter Project`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -229,7 +229,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'gallery'
+        appId: 'EasterEgg'
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

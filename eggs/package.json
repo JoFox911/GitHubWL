@@ -1,8 +1,8 @@
 {
-  "name": "gallery",
+  "name": "easter-egg",
   "version": "0.0.1",
   "description": "A Quasar Project",
-  "productName": "T-Gallery",
+  "productName": "Easter Egg",
   "author": "Eugenia Polishchuk <eugenia.polishchuk@gmail.com>",
   "private": true,
   "scripts": {

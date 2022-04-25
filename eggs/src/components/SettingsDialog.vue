@@ -44,6 +44,8 @@
             src="icons/flags/vereinigte-staaten.png" 
             @click="setLocale('en-US')"
             />
+
+            <q-checkbox v-model="isSoundEnabled" label="Sound" color="teal" />
         </div>
       </div>
     </div>
@@ -73,6 +75,14 @@ export default defineComponent({
   computed: {
     screenIsSmall () {
         return this.$q.screen.width < 576
+    },
+    isSoundEnabled: {
+      get: function() {
+        return this.settingsStore.isSoundEnabled
+      },
+      set: function(newVal) {
+        this.settingsStore.changeSoundAbility(newVal)
+      }
     }
   },
   methods: {
