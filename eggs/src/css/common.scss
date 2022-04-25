@@ -10,3 +10,9 @@
     font-size: 32px;
 	letter-spacing: 0.0075em;
 }
+
+.font-ellipsis {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

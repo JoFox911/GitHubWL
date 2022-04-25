@@ -4,11 +4,11 @@
       <q-toolbar>
 
         <img
-          class="page-logo q-mr-sm"
+          class="page-logo"
           src="icons/eggs.svg"
         />
 
-        <div class="page-title font-header text-warning text-italic text-center text-weight-bold">
+        <div class="page-title font-header text-warning text-italic text-center text-weight-bold font-ellipsis">
           <span>
               {{ $t('info') }}
           </span>
