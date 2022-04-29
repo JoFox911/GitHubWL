@@ -49,7 +49,7 @@
         background: #000000e3;
         position: absolute;
         width: 100vw;
-        height: calc(100vh - #{$header-width} - #{$footer-width});
+        height: 100%;
 
         img {
             max-width: 100%;

@@ -1,39 +1,36 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex flex-center game-container justify-between non-selectable">
+    <color-list 
+      :colorsData="eggsData" 
+      class="first-side-bar q-pt-md"
+      @onClick="colorIndex => clickOnLabelFT(colorIndex)"
+    />
 
-    <div class="game-container justify-between non-selectable">
-      <color-list 
-        :colorsData="eggsData" 
-        class="first-side-bar"
-        @onClick="colorIndex => clickOnLabelFT(colorIndex)"
-      />
+    <div class="eggs-container">
+      <div class="eggs-container-inner justify-evenly items-center">
+        <egg-label 
+          :colorUrl="eggsData[firstTeamEggIndex].color"
+          :class="{ 'right-animation': result === null }"
+          :isWinner="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_WINNERS)"
+          :isLoser="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_LOSERS)"
+          />
 
-      <div class="eggs-container">
-        <div class="eggs-container-inner justify-evenly items-center">
-          <egg-label 
-            :colorUrl="eggsData[firstTeamEggIndex].color"
-            :class="{ 'right-animation': result === null }"
-            :isWinner="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_WINNERS)"
-            :isLoser="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_LOSERS)"
-            />
-
-          <egg-label 
-            :colorUrl="eggsData[secondTeamEggIndex].color"
-            :class="{ 'left-animation': result === null }"
-            :isWinner="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_WINNERS)"
-            :isLoser="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_LOSERS)"/>
-        </div>
+        <egg-label 
+          :colorUrl="eggsData[secondTeamEggIndex].color"
+          :class="{ 'left-animation': result === null }"
+          :isWinner="result && (result === gameResults.SECOND_TEAM || result === gameResults.BOTH_WINNERS)"
+          :isLoser="result && (result === gameResults.FIRST_TEAM || result === gameResults.BOTH_LOSERS)"/>
       </div>
+    </div>
 
-      <color-list
-        :colorsData="eggsData"
-        class="second-side-bar"
-        @onClick="colorIndex => clickOnLabelST(colorIndex)"
-      />
+    <color-list
+      :colorsData="eggsData"
+      class="second-side-bar q-pb-md"
+      @onClick="colorIndex => clickOnLabelST(colorIndex)"
+    />
 
-      <div v-if="isDelayBeforeResults" class="boom items-center animated fadeOut">
-        <img src="images/boom.png"/>
-      </div>
+    <div v-if="isDelayBeforeResults" class="boom items-center justify-center animated fadeOut">
+      <img src="images/boom.png"/>
     </div>
 
     <q-footer reveal elevated>

@@ -35,7 +35,7 @@ export const useSettingsStore = defineStore('settings', {
 
         initSound() {
             const isSoundEnabledLS = getSoundAbility()
-            this.changeSoundAbility(!!isSoundEnabledLS ? isSoundEnabledLS : true)
+            this.changeSoundAbility(isSoundEnabledLS)
         }
     },
 });

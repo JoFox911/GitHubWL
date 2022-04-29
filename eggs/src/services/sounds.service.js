@@ -58,7 +58,7 @@ class SoundsService extends Service {
     return audio
   }
 
-  playBackgroundSound (loop = true, volume = 1) {
+  playBackgroundSound (loop = true, volume = 0.02) {
     this.playSound(this.SOUNDS_LIST.BACKGROUND_THEME, loop, volume)
   }
 

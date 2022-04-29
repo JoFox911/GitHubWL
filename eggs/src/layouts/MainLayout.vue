@@ -8,7 +8,7 @@
           src="icons/eggs.svg"
         />
 
-        <div class="page-title font-header text-warning text-italic text-center text-weight-bold font-ellipsis">
+        <div class="page-title font-header text-warning text-center text-weight-bold font-ellipsis">
           <span>
               {{ $t('info') }}
           </span>
