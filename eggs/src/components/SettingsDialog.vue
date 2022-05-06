@@ -6,46 +6,33 @@
     :transition-hide="screenIsSmall ? 'slide-left' : 'fade'"
     @keydown.enter="onEnterClick"
   >
-    <div class="p-dialog full-width flex column base-bg text-primary">
-      <div
-        class="p-dialog-header full-width row no-wrap justify-between non-selectable p-border-bottom p-border-general font-button backing-after backing-after-medium"
-      >
-        <div
-          class="p-dialog-header-inner row no-wrap font-header q-my-auto q-px-sm"
-        >
+    <div class="p-dialog full-width flex column base-bg text-warning">
+      <div class="p-dialog-header full-width row no-wrap justify-between non-selectable">
+        <div class="p-dialog-header-inner row no-wrap font-header q-my-auto q-px-sm">
           {{ $t('settings') }}
         </div>
-        <div
-          class="flex q-my-auto q-px-sm font-header"
-        >
+        <div class="flex q-my-auto q-px-sm">
           <q-btn
             icon="o_close"
-            class="p-btn-tiny"
             flat
             round
             @click="onCloseBtnClick"
           />
         </div>
       </div>
-      <div
-        class="p-dialog-container font-button flex full-width"
-      >
-        <div
-          class="p-dialog-inner font-main column no-wrap full-width"
-        >
+      <div class="p-dialog-container flex full-width">
+        <div class="p-dialog-inner font-main column no-wrap full-width q-pa-sm">
+
           <img
             class="lang-label cursor-pointer q-mr-sm"
-            src="icons/flags/ukraine.png" 
-            @click="setLocale('uk')"
-            />
+            v-for="locale in localesArray"
+            :key="locale.value"
+            :src="locale.icon"
+            @onClick="setLocale(locale.value)"
+          />
 
-            <img
-            class="lang-label cursor-pointer q-mr-sm"
-            src="icons/flags/vereinigte-staaten.png" 
-            @click="setLocale('en-US')"
-            />
 
-            <q-checkbox v-model="isSoundEnabled" label="Sound" color="teal" />
+          <q-checkbox v-model="isSoundEnabled" label="Sound" color="primary" />
         </div>
       </div>
     </div>
@@ -56,6 +43,8 @@
 import { defineComponent } from 'vue'
 
 import { useSettingsStore } from '@stores/settings-store'
+
+import { LOCALES } from '@/config/locales.enum.js'
 
 export default defineComponent({
   name: 'SettingsDialog',
@@ -73,6 +62,9 @@ export default defineComponent({
     }
   },
   computed: {
+    localesArray () {
+      return Object.values(LOCALES)
+    },
     screenIsSmall () {
         return this.$q.screen.width < 576
     },

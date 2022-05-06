@@ -5,6 +5,7 @@
     background-color: $warning;
 }
 .p-dialog-header {
+	background-color: $primary;
 	border-radius: $area-xs $area-xs 0 0;
 	height: 4em;
 	left: 0;
@@ -29,29 +30,7 @@
 }
 
 .p-dialog-inner {
-	min-height: 10em;
-}
-.p-dialog-inner-has-header {
-	padding-top: 3em;
-	position: relative;
-	&.with-buttons {
-		padding-top: 4em;
-	}
-}
-.p-dialog-inner-header {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 3em;
-	&.with-buttons {
-		height: 4em;
-	}
-	.q-tabs__content {
-		height: 100%;
-	}
-	.q-tab {
-		min-height: 100%;
-	}
+	// min-height: 10em;
 }
 .q-dialog__inner--maximized,
 .p-dialog-full-height {
@@ -81,18 +60,18 @@
 			border-radius: 0;
 		}
 	}
-	.q-dialog__inner--maximized {
-		.p-dialog-inner-header {
-			.q-tab__label {
-				display: none;
-			}
-		}
-	}
 }
 
 .lang-label {
+	border-radius:50%;
+	border: 2px solid #ffffff;
     height: 40px;
     width: 40px;
+
+	&:hover {
+		transform: scale(1.1);
+		border: 2px solid $primary;
+	}
 }
 
 
